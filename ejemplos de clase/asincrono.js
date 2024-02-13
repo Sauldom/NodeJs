@@ -1,5 +1,5 @@
 'use strict';
-
+const async = require("async");
 function escribeTrasTresSegundos(texto, callback){
     setTimeout(()=>{
         console.log(texto);
@@ -9,8 +9,8 @@ function escribeTrasTresSegundos(texto, callback){
 
 //escribeTrasTresSegundos('texto', function(){});
 
-
-/*for (let i=0;i<=5;i++){
+/*
+for (let i=0;i<=5;i++){
     escribeTrasTresSegundos('texto1' + i, function (){
         console.log('fin');
     });
@@ -35,7 +35,7 @@ function serie(n, fn, callback){
 serie(5, escribeTrasTresSegundos,function(){
     console.log('fin');
 });
-*/
+
 function serie(arr, fn, callback){
     if (arr.length==0){
         //termino el bucle
@@ -48,13 +48,47 @@ function serie(arr, fn, callback){
     })
 }
 
-/*serie([1,2,3,'cuatro',5], escribeTrasTresSegundos,function(){
+serie([1,2,3,'cuatro',5], escribeTrasTresSegundos,function(){
     console.log('fin');
-});*/
-
+});
+*/
 async.concatSeries([1,2,3,'cuatro',5], escribeTrasTresSegundos, function(){
     console.log('fin');
 })
 
 
+/*
+"use strict";
+const async = require("async");
 
+function escribeTras2Segundos(texto, callback) {
+  setTimeout(() => {
+    console.log(texto);
+    callback();
+  }, 2000);
+}
+
+function serie(arr, fn, callback) {
+  if (arr.length == 0) {
+    // termino el bucle
+    callback();
+    return;
+  }
+  fn("texto" + arr.shift(), function () {
+    serie(arr, fn, callback);
+  });
+}
+
+
+ async.concat([1, 2, 3, "cuatro", 5], escribeTras2Segundos, () => {
+   console.log("fin");
+ });
+
+
+// u opcionalmente utilizamos concatSeries: 
+// The same as concat but runs only a single async operation at a time.
+// https://caolan.github.io/async/v3/docs.html#concatSeries
+async.concatSeries([1, 2, 3, "cuatro", 5], escribeTras2Segundos, () => {
+  console.log("fin");
+});
+*/
