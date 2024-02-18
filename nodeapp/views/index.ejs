@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <%= otracosa %>
+
+    <p>
+      Ejemplo de inyeccion: <%-inyeccion %>
+    </p>
+
+    <h2>Condicionales</h2>
+   
+
+    
+    <p>
+       <% if (esPar){ %>
+       El segundo actual es: <%= segundoActual%> y es par
+       <% }else {%>
+       El segundo actual es: <%= segundoActual%> y es impar
+       <%}%>
+    </p>
+
+<h2> bucles</h2>
+    <% users.forEach(user=>{%>
+      <p><%= user.name %> tiene <%= user.age %></p>
+    <%})%>
+
+
+
+  </body>
+</html>
