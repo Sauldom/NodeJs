@@ -68,3 +68,18 @@ console.log(Agente.prototype);
 console.log (smith instanceof Persona);
 console.log (smith instanceof Agente);
 console.log (smith instanceof SuperHeroe);
+
+//------ eventos
+
+// quiero que mis agentes emitan eventos
+
+const EventEmitter = require('node:events')
+/*
+Object.assign(Agente.prototype, new EventEmitter());
+
+smith.on('volando', function(){
+    console.log('smith esta volando');
+
+})
+
+smith.emit('volando');*/

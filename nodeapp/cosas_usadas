@@ -1,0 +1,173 @@
+ayuda de node express
+
+npx express-generator -h
+
+creamos un general de una ap de express automaticamente
+npx express-generator -ejs nodeapp
+
+entramos en la carpeta y metemos npm
+npm install
+
+iniciar la app
+
+DEBUG=nodeapp:* npm start
+
+si ponemos la direccion en el navegador
+127.0.0.1: el puerto de escucha en este caso el 3000
+
+tendria que salir la pagina de bienvenida de express
+
+
+npm start    o   npm test ejecuta al script que hay en el archivo json con la direccion 
+que viene ya puesta
+
+podemos modifcar el json por ejemplo
+"dev": "nodemon ./bin/www"
+
+y si ponemos npm run dev ejecutaria ese script
+
+nodemon en princpio no esta instalado
+npm install nodeom --save-dev
+
+lo actualizamos npm run dev
+
+para isntalar una libreria 
+npm install cross-env
+par ahacerlo multipplataforma hay que cambiar el script del json
+
+"dev": "cross-env DEBUG=nodeapp:* nodemon ./bin/www"
+
+tambien es interesante cambiar en el json ponerlo 
+"devDependencies": {
+    "nodemon": "3.0.3"
+  }
+
+en la carpeta bin el archivo www
+
+podemos cambiar el puerto por defecto en este rango
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+con el comando node_env=
+
+podemos cammbiar si es la version definitiva o en desarrollo que se conecte de una
+manera y otra o que envie o reciba diferentes cosas como los email
+se recomienda que en local se pongan en produccio por defecto
+
+podemos idear nuestra propio alias
+nombre_env= development
+
+Hemos modificado
+"dev": "cross-env NODEAPP_ENV=development PORT=3001 DEBUG=nodeapp:* nodemon ./bin/www"
+"start": "cross-env NODEAPP_ENV=production node ./bin/www"
+
+y asi no tenemos que hacerlo desde la consola
+
+con npm audit 
+te dice las vulnerabilidades que tiene ya que al arrancar te aparecen varias
+
+con esto puedes bajarte la ultima version
+npm install ejs@latest
+
+
+una aplicacion de express recibe archivos http y puede definir un middleware 
+que es un software de intercambio (middle), que deberia responder a la peticion
+que hace un log por ejemplo, express seria como una lista de middlewares que si no responden deberian
+dar paso al siguiente
+
+un ejemplo es en la carpeta routes
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+
+eso seria un middleware que hace de enrutador de la peticion
+
+vovlemos en el package a quitar el puerto 3001
+en app.js
+
+app.get('/prueba', (rq, res, next)=>{
+  res.send('página de prueba');
+})
+
+de esta forma cuando vamos a la pagina/prueba pues sale le texto en pantalla
+
+
+cade vez que añadamos direcciones en routes
+
+en app.js
+
+cortaamos 
+var indexRouter = ;
+var usersRouter = ;
+
+y pegamos en 
+app.use('/', require('./routes/index'));
+app.use('/users', require('./routes/users'));
+
+y borramos las variables
+
+y debajo del view engines estan los middleware los hemos comentados
+
+/*
+*Middlewares
+*/
+
+
+npm tiene un comando para saber que tiene cada libreria
+
+npom repo nombre
+y te abre el browser con esa libreria y puedes ya entrar y ver que ahce cada una
+
+
+Cannot set headers after they are sent to the client
+este error es que esta intentando responder 2 veces.
+
+express define las rutas con
+
+app.METHOD(PATH,HANDLER)
+
+idempotente, si lo ejecutas varias veces los resultados son los mismos
+peticiones con GET (pedir datos)
+crear recursos POST (crear un usuario)
+actualizar PUT(modificar un usuario existente)
+eliminar un recurse DELETE(eliminar un usuario)
+
+el orden de las rutas es importante
+porque lo evalua en orden y por razones de movimiento
+por ejemplo manejar los enrutadores de la tienda que es la que mas peticiones recibe
+
+
+templates
+
+npm install ejs -save
+
+views: directoria de nuestras plantillas
+
+view engine: el template engine
+app.set ('view engine', 'jade')
+
+express lo carga automaticamente y podemos usarlo
+
+pasar variables
+{ title: 'Express' }   como si fueran objetos
+
+con res.locals.(nombre)   es el objeto locals son variables a una respuesta
+
+
+de forma global
+son sobreescritas por las locales
+app.locals.title='nodeapp'
+
+para hacer inyeccion de codigo a la hora de ponerlo en html
+<%= otracosa %>
+    Ejemplo de inyeccion: <%-inyeccion %>
+    se cambia el = por un -
+
+
+para encontrar errores en la lista ejs-lint
