@@ -171,3 +171,11 @@ para hacer inyeccion de codigo a la hora de ponerlo en html
 
 
 para encontrar errores en la lista ejs-lint
+
+
+para iniciar con npm start
+npm run dev
+
+/express validator es un middle para validaciones
+
+npm install express-validator
