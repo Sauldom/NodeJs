@@ -1,5 +1,18 @@
 # Node App
 
+Install dependencies
+```
+js
+npm install
+```
+
+Initialize the database
+* Warning, next command deletes all the database!!!!
+
+```sh
+npm run init_db
+
+```
 ## Development
 
 To start the application in development mode use:

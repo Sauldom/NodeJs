@@ -2,22 +2,32 @@ var express = require('express');
 var router = express.Router();
 
 const Agente = require('../../models/Agente');
-
+const basicAuth = require('basic-auth');
 //GET /api/agentes
 //devuelve una lista de agentes
 
 //lo modificamos para permitir un parametro de entrada para filtrar
-router.get('/', async function (req, res,next){
+router.get('/', basicAuth, async function (req, res,next){
   try{
+    
+    
 
       //filtros
+      //http://127.0.0.1:3000/api/agentes?age=19
     const filterByName = req.query.name;
     const filterByAge = req.query.age;
     
     //paginacion
+    //http://127.0.0.1:3000/api/agentes?skip=2&limit=4
     const skip= req.query.skip;
     const limit = req.query.limit;
-  
+    
+    //ordenacion
+    //http://127.0.0.1:3000/api/agentes?skip=2&limit=4&sort=age 
+    const sort = req.query.sort;
+    //field selection
+    //http://127.0.0.1:3000/api/agentes?fields=name
+    const fields = req.query.fields;
 
     const filter ={};
     if (filterByName ){
@@ -26,7 +36,7 @@ router.get('/', async function (req, res,next){
     if(filterByAge){
         filter.age=filterByAge;
     }
-    const agentes = await Agente.listar(filter, skip, limit);
+    const agentes = await Agente.listar(filter, skip, limit,sort, fields);
 
     res.json({results:agentes});
   }catch (error){

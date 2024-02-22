@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var basicAuth = require('./lib/basicAuthMiddleware');
 
 require('./lib/connect_moongoose');
 
@@ -41,7 +42,7 @@ app.get('/prueba', (req, res, next)=>{
  * Rutas del API
  * 
  */
-app.use('/api/agentes', require('./routes/api/agentes'));
+app.use('/api/agentes', basicAuth, require('./routes/api/agentes'));
 
 
 /*

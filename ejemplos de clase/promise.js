@@ -1,6 +1,6 @@
 'use strict';
 
-
+//const sleep = ms => new Promise (resolve =>setTimeout(resolve.bind(null, 42),ms))
 //funcion que devuelve una promesa, asi que lo primero es devolver la promesa
 //las promesas son objetos
 
