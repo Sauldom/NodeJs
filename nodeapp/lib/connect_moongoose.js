@@ -14,3 +14,5 @@ mongoose.connection.once('open', ()=>{
 mongoose.connect('mongodb://127.0.0.1:27017/cursonode');
 
 module.exports = mongoose.connection;
+
+

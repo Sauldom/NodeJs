@@ -84,3 +84,11 @@ esta en la carpeta bootcamp
 la conexion es la que ha salido por defecto
 bastante interesante de usar
 
+mongoose es un libreria que nos permite persistir objetos en mongoDb, recuperarlos y manener esquemas de estos facilmente
+ODM Object Document Mapper
+
+npm install mongoose en la carpeta de al app
+y arrancamos el dev npm run dev
+
+en lib hemos creado un connect de moongose y luego en la app un require que cuando 
+hemos guardado ondemon nos ha dicho que estamos conectados

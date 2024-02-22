@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+require('./lib/connect_moongoose');
 
 var app = express();
 
@@ -36,6 +37,18 @@ app.get('/prueba', (req, res, next)=>{
   next();
 })
 
+/**
+ * Rutas del API
+ * 
+ */
+app.use('/api/agentes', require('./routes/api/agentes'));
+
+
+/*
+rutas del website
+
+*/
+
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
 
@@ -54,6 +67,16 @@ app.use(function(err, req, res, next) {
     err.message = `Not valid - ${errInfo.type} in ${errInfo.location} ${errInfo.path} ${errInfo.msg}`;
     err.status =422;
   }
+
+
+// detectar si el fallo es en el API
+//responder en el formato JSON
+  if (req.originalUrl.startsWith('/api')){
+    res.json({error:err.message});
+    return;
+  }
+
+
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
